@@ -1,0 +1,62 @@
+# Enforce LF for text
+* text=auto eol=lf
+
+# Unity-specific text assets
+*.cs      text diff=csharp
+*.shader  text
+*.cginc   text
+*.hlsl    text
+*.compute text
+*.uxml    text
+*.uss     text
+*.asmdef  text
+*.json    text
+*.xml     text
+*.yaml    text
+*.yml     text
+*.unity   text
+*.prefab  text
+*.mat     text
+*.anim    text
+*.meta    text
+*.physicMaterial text
+
+# Common configs
+*.txt     text
+*.md      text
+*.ini     text
+*.csv     text
+
+# Treat all binaries as binary (no diff, no line ending changes)
+*.dll   binary
+*.exe   binary
+*.pdb   binary
+*.so    binary
+*.dylib binary
+
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.tga   binary
+*.tif   binary
+*.tiff  binary
+*.psd   binary
+*.ico   binary
+
+*.mp3   binary
+*.ogg   binary
+*.wav   binary
+*.aiff  binary
+
+*.mp4   binary
+*.mov   binary
+*.avi   binary
+
+*.fbx   binary
+*.obj   binary
+*.3ds   binary
+*.blend binary
+*.max   binary
+*.c4d   binary
+
+*.unitypackage binary
