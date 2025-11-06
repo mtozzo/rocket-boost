@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,45 +9,24 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField]
     private InputAction boosterAction;
     
-    // private Rigidbody rb;
-    // private Vector2 turnInput;
-    // public float turnSpeed = 5f;
+    private Rigidbody rb;
     
-    // [SerializeField]
-    // public float m_Thrust = 10f;
+    [SerializeField]
+    public float thrust = 1000f;
 
     private void Start()
     {
-        // turnAction = InputSystem.actions.FindAction("Move");
-        // boosterAction = InputSystem.actions.FindAction("Jump");
-        
-        // rb = GetComponent<Rigidbody>();
-        // rb.interpolation = RigidbodyInterpolation.Interpolate;
-        // rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        // rb.freezeRotation = true;
+        //Fetch the Rigidbody from the GameObject with this script attached
+        rb = GetComponent<Rigidbody>();
     }
-
-    private void Update()
-    {
-        // turnInput = turnAction.ReadValue<Vector2>();
-        if (boosterAction.IsPressed())
-        {
-            Debug.Log("booster action is pressed");
-        }
-    }
-
+    
     private void FixedUpdate()
     {
-        // if (turnInput.x != 0f)
-        // {
-        //     Quaternion turn = Quaternion.Euler(0f, 0f, -1 * turnInput.x * turnSpeed * Time.fixedDeltaTime);
-        //     rb.MoveRotation(rb.rotation * turn);
-        // }
-        //
-        // if (boosterAction.IsPressed())
-        // {
-        //     rb.AddForce(transform.up * m_Thrust);
-        // }
+        if (boosterAction.IsPressed())
+        {
+            //Apply a force to this Rigidbody in direction of this GameObjects up axis
+            rb.AddRelativeForce(Vector3.up * (thrust * Time.fixedDeltaTime));
+        }
     }
 
     private void OnEnable()
