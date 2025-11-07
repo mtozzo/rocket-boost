@@ -744,7 +744,79 @@ MonoBehaviour:
     m_Id: 4eb11fb2-3a59-43df-9a22-25869f9c7752
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis
+      m_Id: 0f791b7b-9fe4-41d0-9821-7478809935a5
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: a6f816dc-65ca-4774-97f6-0857909b30bf
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 2df04303-30f6-44fc-9aec-ea581cf1bbbb
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
+    - m_Name: 1D Axis
+      m_Id: aab29fba-2013-4938-9eda-202a3665c210
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: e3f379ca-b237-45a9-af69-abb5defe67df
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: af56e7f4-88f8-43b1-8827-2d2f42c725de
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
+    - m_Name: 1D Axis
+      m_Id: 6501f40b-4a35-4274-9b0a-dcf6d364eab5
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 76663325-0003-4bfe-8577-563a35f81b31
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 92ba9bf0-b0f6-44e5-80de-11444fe16414
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Turn
+      m_Flags: 8
     m_Flags: 0
   boosterAction:
     m_Name: Booster
@@ -771,7 +843,33 @@ MonoBehaviour:
       m_Action: Booster
       m_Flags: 0
     m_Flags: 0
-  thrust: 10
+  resetAction:
+    m_Name: Reset
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 64df0ade-4560-49ab-918b-f20831526a1d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 67c1604c-6dc5-4c20-bf16-f053309b6363
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Reset
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 61059a78-3297-4589-92d0-d3a2868bf6cb
+      m_Path: <Keyboard>/backquote
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Reset
+      m_Flags: 0
+    m_Flags: 0
+  thrust: 1000
+  rotationSpeed: 100
 --- !u!4 &1424834575
 Transform:
   m_ObjectHideFlags: 0
@@ -834,7 +932,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 48
   m_CollisionDetection: 0
 --- !u!1001 &8456326977406372961
 PrefabInstance:
