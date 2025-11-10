@@ -43,24 +43,20 @@ public class NewMonoBehaviourScript : MonoBehaviour
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
             ProcessBoost();
         }
-        
-        if (turnAction.IsPressed())
-        {
-            float turnValue = turnAction.ReadValue<float>();
+
+        if (!turnAction.IsPressed()) return;
+        var turnValue = turnAction.ReadValue<float>();
             
-            if (turnValue > 0)
-            {
+        switch (turnValue)
+        {
+            case > 0:
                 //Turning Right
                 transform.Rotate(0, 0, -rotationSpeed * Time.fixedDeltaTime);
-            }
-            else if (turnValue < 0)
-            {
+                break;
+            case < 0:
                 //Turning Left
                 transform.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
-            }
-            
-            //Apply a torque to this Rigidbody around this GameObjects forward axis
-            // rb.AddRelativeTorque(Vector3.forward * (turnValue * rotationSpeed * Time.fixedDeltaTime));
+                break;
         }
     }
 
