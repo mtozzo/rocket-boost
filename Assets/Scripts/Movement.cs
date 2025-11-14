@@ -24,6 +24,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         //Fetch the Rigidbody from the GameObject with this script attached
         rb = GetComponent<Rigidbody>();
+        
+        Debug.Log("gravity is " + Physics.gravity);
     }
     
     private void FixedUpdate()
