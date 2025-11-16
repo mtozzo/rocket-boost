@@ -14,6 +14,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     
     private Rigidbody rb;
     
+    private AudioSource audioSource;
+
+    private bool isPlaying = false;
+    
     [SerializeField]
     public float thrust = 1000f;
     
@@ -24,6 +28,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         //Fetch the Rigidbody from the GameObject with this script attached
         rb = GetComponent<Rigidbody>();
+        
+        audioSource = GetComponent<AudioSource>();
         
         Debug.Log("gravity is " + Physics.gravity);
     }
@@ -44,6 +50,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
         {
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
             ProcessBoost();
+
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();   
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();   
+            }
         }
 
         if (!turnAction.IsPressed()) return;
