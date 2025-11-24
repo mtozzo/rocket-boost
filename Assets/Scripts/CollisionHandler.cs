@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
@@ -21,13 +22,32 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case FINISH_TAG:
                 Debug.Log("Collided with Finish object.");
+                LoadNextLevel();
                 break;
             case FUEL_TAG:
                 Debug.Log("Collided with Fuel object.");
                 break;
             default:
                 Debug.Log("You crashed!");
+                ReloadCurrentLevel();
                 break;
         }
+    }
+    
+    private static void ReloadCurrentLevel()
+    {
+        var currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
+    }
+    
+    private static void LoadNextLevel()
+    {
+        var currentScene = SceneManager.GetActiveScene();
+        var nextSceneIndex = currentScene.buildIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
