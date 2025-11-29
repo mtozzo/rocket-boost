@@ -16,8 +16,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     
     private AudioSource audioSource;
 
-    private bool isPlaying = false;
-    
     [SerializeField]
     public float thrust = 1000f;
     

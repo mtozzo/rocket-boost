@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private const string FRIENDLY_TAG = "Friendly";
-    private const string FINISH_TAG = "Finish";
-    private const string FUEL_TAG = "Fuel";
+    private const string FriendlyTag = "Friendly";
+    private const string FinishTag = "Finish";
+    private const string FuelTag = "Fuel";
     
     private void OnCollisionEnter(Collision  other)
     {
@@ -17,14 +16,14 @@ public class CollisionHandler : MonoBehaviour
 
         switch (other.gameObject.tag)
         {
-            case FRIENDLY_TAG:
+            case FriendlyTag:
                 Debug.Log("Collided with Friendly object.");
                 break;
-            case FINISH_TAG:
+            case FinishTag:
                 Debug.Log("Collided with Finish object.");
                 LoadNextLevel();
                 break;
-            case FUEL_TAG:
+            case FuelTag:
                 Debug.Log("Collided with Fuel object.");
                 break;
             default:
