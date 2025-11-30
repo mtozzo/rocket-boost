@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField]
+    public float delayBeforeReload = 2f;
+    
     private const string FriendlyTag = "Friendly";
     private const string FinishTag = "Finish";
     private const string FuelTag = "Fuel";
@@ -20,20 +24,32 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Collided with Friendly object.");
                 break;
             case FinishTag:
-                Debug.Log("Collided with Finish object.");
-                LoadNextLevel();
+                StartLevelFinishSequence();
                 break;
             case FuelTag:
                 Debug.Log("Collided with Fuel object.");
                 break;
             default:
-                Debug.Log("You crashed!");
-                ReloadCurrentLevel();
+                StartCrashSequence();
                 break;
         }
     }
+
+    private void StartCrashSequence()
+    {
+        Debug.Log("You crashed!");
+        GetComponent<Movement>().enabled = false;
+        Invoke(nameof(ReloadCurrentLevel), delayBeforeReload);
+    }
+
+    private void StartLevelFinishSequence()
+    {
+        Debug.Log("Collided with Finish object.");
+        GetComponent<Movement>().enabled = false;
+        Invoke(nameof(LoadNextLevel), delayBeforeReload);
+    }
     
-    private static void ReloadCurrentLevel()
+    private void ReloadCurrentLevel()
     {
         var currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
