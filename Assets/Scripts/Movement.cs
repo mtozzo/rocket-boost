@@ -22,6 +22,9 @@ public class Movement : MonoBehaviour
     [SerializeField]
     public float rotationSpeed = 10f;
 
+    [SerializeField] 
+    public AudioClip boosterAudioClip;
+
     private void Start()
     {
         //Fetch the Rigidbody from the GameObject with this script attached
@@ -51,7 +54,7 @@ public class Movement : MonoBehaviour
 
             if (!audioSource.isPlaying)
             {
-                audioSource.Play();   
+                audioSource.PlayOneShot(boosterAudioClip);
             }
         }
         else

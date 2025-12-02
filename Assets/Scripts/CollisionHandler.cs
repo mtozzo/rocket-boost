@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,10 +5,23 @@ public class CollisionHandler : MonoBehaviour
 {
     [SerializeField]
     public float delayBeforeReload = 2f;
+
+    [SerializeField] 
+    public AudioClip crashAudioClip;    
+
+    [SerializeField] 
+    public AudioClip levelFinishAudioClip;    
     
+    private AudioSource audioSource;
+
     private const string FriendlyTag = "Friendly";
     private const string FinishTag = "Finish";
     private const string FuelTag = "Fuel";
+    
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }    
     
     private void OnCollisionEnter(Collision  other)
     {
@@ -38,6 +50,9 @@ public class CollisionHandler : MonoBehaviour
     private void StartCrashSequence()
     {
         Debug.Log("You crashed!");
+        
+        audioSource.PlayOneShot(crashAudioClip);
+        
         GetComponent<Movement>().enabled = false;
         Invoke(nameof(ReloadCurrentLevel), delayBeforeReload);
     }
@@ -45,6 +60,9 @@ public class CollisionHandler : MonoBehaviour
     private void StartLevelFinishSequence()
     {
         Debug.Log("Collided with Finish object.");
+        
+        audioSource.PlayOneShot(levelFinishAudioClip);
+        
         GetComponent<Movement>().enabled = false;
         Invoke(nameof(LoadNextLevel), delayBeforeReload);
     }
@@ -55,7 +73,7 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(currentScene.buildIndex);
     }
     
-    private static void LoadNextLevel()
+    private void LoadNextLevel()
     {
         var currentScene = SceneManager.GetActiveScene();
         var nextSceneIndex = currentScene.buildIndex + 1;
