@@ -13,6 +13,8 @@ public class CollisionHandler : MonoBehaviour
     public AudioClip levelFinishAudioClip;    
     
     private AudioSource audioSource;
+    
+    private Rigidbody rb;
 
     private const string FriendlyTag = "Friendly";
     private const string FinishTag = "Finish";
@@ -20,6 +22,9 @@ public class CollisionHandler : MonoBehaviour
     
     private void Start()
     {
+        //Fetch the Rigidbody from the GameObject with this script attached
+        rb = GetComponent<Rigidbody>();
+        
         audioSource = GetComponent<AudioSource>();
     }    
     
@@ -52,8 +57,7 @@ public class CollisionHandler : MonoBehaviour
         Debug.Log("You crashed!");
         
         audioSource.PlayOneShot(crashAudioClip);
-        
-        GetComponent<Movement>().enabled = false;
+        FreezePlayerMovement();
         Invoke(nameof(ReloadCurrentLevel), delayBeforeReload);
     }
 
@@ -63,8 +67,17 @@ public class CollisionHandler : MonoBehaviour
         
         audioSource.PlayOneShot(levelFinishAudioClip);
         
-        GetComponent<Movement>().enabled = false;
+        FreezePlayerMovement();
         Invoke(nameof(LoadNextLevel), delayBeforeReload);
+    }
+
+    private void FreezePlayerMovement()
+    {
+        rb.isKinematic = true;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        
+        GetComponent<Movement>().enabled = false;
     }
     
     private void ReloadCurrentLevel()
