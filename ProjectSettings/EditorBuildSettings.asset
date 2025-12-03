@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Over.unity
     guid: 337d823f1acddc24ea64f632dc0446eb
   - enabled: 1
-    path: Assets/Scenes/Under.unity
+    path: Assets/Scenes/02_Under.unity
     guid: a9d9e2c4f76b1e34ba54ea87c350469e
   - enabled: 1
-    path: Assets/Scenes/Through.unity
+    path: Assets/Scenes/03_Through.unity
     guid: 0fc4148afe2455c4d8663d54b72249f3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
