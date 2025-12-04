@@ -15,6 +15,8 @@ public class CollisionHandler : MonoBehaviour
     private AudioSource audioSource;
     
     private Rigidbody rb;
+    
+    private bool isControllable = true;
 
     private const string FriendlyTag = "Friendly";
     private const string FinishTag = "Finish";
@@ -22,14 +24,21 @@ public class CollisionHandler : MonoBehaviour
     
     private void Start()
     {
+        isControllable = true;
+        
         //Fetch the Rigidbody from the GameObject with this script attached
         rb = GetComponent<Rigidbody>();
-        
         audioSource = GetComponent<AudioSource>();
     }    
     
     private void OnCollisionEnter(Collision  other)
     {
+        if (false == isControllable)
+        {
+            Debug.Log("No collision handling, player is not controllable.");
+            return;
+        }
+
         // Debug.Log("hit something");
         // Debug.Log(gameObject.name + " collided with " + other.gameObject.name + " this object has tag " +
         //           other.gameObject.tag + " and " + (other.gameObject.CompareTag("Player") ? "is" : "is not") +
@@ -56,6 +65,7 @@ public class CollisionHandler : MonoBehaviour
     {
         Debug.Log("You crashed!");
         
+        isControllable = false;
         audioSource.PlayOneShot(crashAudioClip);
         FreezePlayerMovement();
         Invoke(nameof(ReloadCurrentLevel), delayBeforeReload);
@@ -65,8 +75,8 @@ public class CollisionHandler : MonoBehaviour
     {
         Debug.Log("Collided with Finish object.");
         
+        isControllable = false;
         audioSource.PlayOneShot(levelFinishAudioClip);
-        
         FreezePlayerMovement();
         Invoke(nameof(LoadNextLevel), delayBeforeReload);
     }
@@ -74,8 +84,6 @@ public class CollisionHandler : MonoBehaviour
     private void FreezePlayerMovement()
     {
         rb.isKinematic = true;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
         
         GetComponent<Movement>().enabled = false;
     }
