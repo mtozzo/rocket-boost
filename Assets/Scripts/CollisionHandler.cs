@@ -10,7 +10,13 @@ public class CollisionHandler : MonoBehaviour
     public AudioClip crashAudioClip;    
 
     [SerializeField] 
-    public AudioClip levelFinishAudioClip;    
+    public AudioClip levelFinishAudioClip;
+    
+    [SerializeField]
+    public ParticleSystem crashParticles;
+
+    [SerializeField]
+    public ParticleSystem levelFinishParticles;
     
     private AudioSource audioSource;
     
@@ -67,6 +73,7 @@ public class CollisionHandler : MonoBehaviour
         
         isControllable = false;
         audioSource.PlayOneShot(crashAudioClip);
+        crashParticles.Play();
         FreezePlayerMovement();
         Invoke(nameof(ReloadCurrentLevel), delayBeforeReload);
     }
@@ -77,6 +84,7 @@ public class CollisionHandler : MonoBehaviour
         
         isControllable = false;
         audioSource.PlayOneShot(levelFinishAudioClip);
+        levelFinishParticles.Play();
         FreezePlayerMovement();
         Invoke(nameof(LoadNextLevel), delayBeforeReload);
     }
