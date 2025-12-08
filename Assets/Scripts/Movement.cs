@@ -24,6 +24,16 @@ public class Movement : MonoBehaviour
 
     [SerializeField] 
     public AudioClip boosterAudioClip;
+    
+    [SerializeField]
+    public ParticleSystem mainBoosterParticles;
+
+    [SerializeField]
+    public ParticleSystem leftBoosterParticles;
+
+    [SerializeField]
+    public ParticleSystem rightBoosterParticles;
+
 
     private void Start()
     {
@@ -61,11 +71,29 @@ public class Movement : MonoBehaviour
         {
             if (audioSource.isPlaying)
             {
-                audioSource.Stop();   
+                audioSource.Stop();
+            }
+            
+            if (mainBoosterParticles.isPlaying)
+            {
+                mainBoosterParticles.Stop();
             }
         }
 
-        if (!turnAction.IsPressed()) return;
+        if (!turnAction.IsPressed())
+        {
+            if (leftBoosterParticles.isPlaying)
+            {
+                leftBoosterParticles.Stop();
+            }
+            
+            if (rightBoosterParticles.isPlaying)
+            {
+                rightBoosterParticles.Stop();
+            }
+            return;
+        }
+            
         var turnValue = turnAction.ReadValue<float>();
             
         switch (turnValue)
@@ -73,10 +101,23 @@ public class Movement : MonoBehaviour
             case > 0:
                 //Turning Right
                 transform.Rotate(0, 0, -rotationSpeed * Time.fixedDeltaTime);
+                leftBoosterParticles.Play();
                 break;
             case < 0:
                 //Turning Left
                 transform.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
+                rightBoosterParticles.Play();
+                break;
+            default:
+                if (leftBoosterParticles.isPlaying)
+                {
+                    leftBoosterParticles.Stop();
+                }
+            
+                if (rightBoosterParticles.isPlaying)
+                {
+                    rightBoosterParticles.Stop();
+                }
                 break;
         }
     }
@@ -84,6 +125,7 @@ public class Movement : MonoBehaviour
     private void ProcessBoost()
     {
         rb.AddRelativeForce(Vector3.up * (thrust * Time.fixedDeltaTime));
+        mainBoosterParticles.Play();
     }
 
     private void OnEnable()
