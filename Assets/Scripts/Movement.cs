@@ -34,7 +34,6 @@ public class Movement : MonoBehaviour
     [SerializeField]
     public ParticleSystem rightBoosterParticles;
 
-
     private void Start()
     {
         //Fetch the Rigidbody from the GameObject with this script attached
@@ -50,10 +49,7 @@ public class Movement : MonoBehaviour
         if (resetAction.IsPressed())
         {
             //Reset the position and rotation of the Rigidbody
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            transform.position = Vector3.zero;
-            transform.rotation = Quaternion.identity;
+            ProcessReset();
             return;
         }
         
@@ -61,41 +57,25 @@ public class Movement : MonoBehaviour
         {
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
             ProcessBoost();
-
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(boosterAudioClip);
-            }
         }
         else
         {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Stop();
-            }
-            
-            if (mainBoosterParticles.isPlaying)
-            {
-                mainBoosterParticles.Stop();
-            }
+            ProcessBoostStop();
         }
 
         if (!turnAction.IsPressed())
         {
-            if (leftBoosterParticles.isPlaying)
-            {
-                leftBoosterParticles.Stop();
-            }
-            
-            if (rightBoosterParticles.isPlaying)
-            {
-                rightBoosterParticles.Stop();
-            }
+            ProcessNotTurning();
             return;
         }
             
+        ProcessTurning();
+    }
+
+    private void ProcessTurning()
+    {
         var turnValue = turnAction.ReadValue<float>();
-            
+
         switch (turnValue)
         {
             case > 0:
@@ -122,10 +102,49 @@ public class Movement : MonoBehaviour
         }
     }
 
+    private void ProcessNotTurning()
+    {
+        if (leftBoosterParticles.isPlaying)
+        {
+            leftBoosterParticles.Stop();
+        }
+
+        if (rightBoosterParticles.isPlaying)
+        {
+            rightBoosterParticles.Stop();
+        }
+    }
+
+    private void ProcessReset()
+    {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+    }
+
+    private void ProcessBoostStop()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        if (mainBoosterParticles.isPlaying)
+        {
+            mainBoosterParticles.Stop();
+        }
+    }
+
     private void ProcessBoost()
     {
         rb.AddRelativeForce(Vector3.up * (thrust * Time.fixedDeltaTime));
         mainBoosterParticles.Play();
+        
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(boosterAudioClip);
+        }
     }
 
     private void OnEnable()

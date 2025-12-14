@@ -18,6 +18,16 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField]
     public ParticleSystem levelFinishParticles;
     
+    [SerializeField]
+    public ParticleSystem mainBoosterParticles;
+
+    [SerializeField]
+    public ParticleSystem leftBoosterParticles;
+
+    [SerializeField]
+    public ParticleSystem rightBoosterParticles;
+    
+    
     private AudioSource audioSource;
     
     private Rigidbody rb;
@@ -72,7 +82,11 @@ public class CollisionHandler : MonoBehaviour
         Debug.Log("You crashed!");
         
         isControllable = false;
+        audioSource.Stop();
         audioSource.PlayOneShot(crashAudioClip);
+        mainBoosterParticles.Stop();
+        leftBoosterParticles.Stop();
+        rightBoosterParticles.Stop();
         crashParticles.Play();
         FreezePlayerMovement();
         Invoke(nameof(ReloadCurrentLevel), delayBeforeReload);
@@ -83,8 +97,12 @@ public class CollisionHandler : MonoBehaviour
         Debug.Log("Collided with Finish object.");
         
         isControllable = false;
+        audioSource.Stop();
         audioSource.PlayOneShot(levelFinishAudioClip);
         levelFinishParticles.Play();
+        mainBoosterParticles.Stop();
+        leftBoosterParticles.Stop();
+        rightBoosterParticles.Stop();
         FreezePlayerMovement();
         Invoke(nameof(LoadNextLevel), delayBeforeReload);
     }
@@ -93,7 +111,8 @@ public class CollisionHandler : MonoBehaviour
     {
         rb.isKinematic = true;
         
-        GetComponent<Movement>().enabled = false;
+        var movementComponent = GetComponent<Movement>();
+        movementComponent.enabled = false;
     }
     
     private void ReloadCurrentLevel()

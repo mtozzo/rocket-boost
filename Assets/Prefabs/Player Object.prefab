@@ -256,6 +256,9 @@ MonoBehaviour:
   levelFinishAudioClip: {fileID: 8300000, guid: 1f07204fe8a8f2d45b8f22f3e3c67856, type: 3}
   crashParticles: {fileID: 940494605388381771}
   levelFinishParticles: {fileID: 2828635471458895218}
+  mainBoosterParticles: {fileID: 7210239447166740782}
+  leftBoosterParticles: {fileID: 1207180672815224962}
+  rightBoosterParticles: {fileID: 6941834798662950432}
 --- !u!82 &6755010711676348124
 AudioSource:
   m_ObjectHideFlags: 0
