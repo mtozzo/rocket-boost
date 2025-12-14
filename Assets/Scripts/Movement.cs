@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Movement : MonoBehaviour
 
     [SerializeField]
     private InputAction resetAction;
+
+    [SerializeField]
+    private InputAction levelSkipAction;
     
     private Rigidbody rb;
     
@@ -49,7 +53,15 @@ public class Movement : MonoBehaviour
         if (resetAction.IsPressed())
         {
             //Reset the position and rotation of the Rigidbody
+            Debug.Log("Processing reset");
             ProcessReset();
+            return;
+        }
+
+        if (levelSkipAction.IsPressed())
+        {
+            Debug.Log("Processing level skip");
+            ProcessLevelSkip();
             return;
         }
         
@@ -122,6 +134,11 @@ public class Movement : MonoBehaviour
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
     }
+    
+    private void ProcessLevelSkip()
+    {
+        Invoke(nameof(LoadNextLevel), 0f);
+    }
 
     private void ProcessBoostStop()
     {
@@ -152,5 +169,17 @@ public class Movement : MonoBehaviour
         turnAction.Enable();
         boosterAction.Enable();
         resetAction.Enable();
+        levelSkipAction.Enable();
     }
+    
+    private void LoadNextLevel()
+    {
+        var currentScene = SceneManager.GetActiveScene();
+        var nextSceneIndex = currentScene.buildIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
+    }    
 }

@@ -185,6 +185,23 @@ MonoBehaviour:
       m_Action: Reset
       m_Flags: 0
     m_Flags: 0
+  levelSkipAction:
+    m_Name: Level Skip
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: edc47245-5d33-4b14-acf1-352d05b0d862
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1bc39fd9-0193-492d-bb6a-ac8881b6dcc9
+      m_Path: <Keyboard>/l
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Level Skip
+      m_Flags: 0
+    m_Flags: 0
   thrust: 1000
   rotationSpeed: 100
   boosterAudioClip: {fileID: 8300000, guid: 631bc3a0484fb0b4ca77ab55c5f032f2, type: 3}
