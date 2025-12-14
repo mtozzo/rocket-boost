@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1956734927764737197}
   - component: {fileID: 1414363083522650586}
   - component: {fileID: 4506428770335874895}
-  - component: {fileID: 4709989788809808408}
   - component: {fileID: 122194272954758149}
+  - component: {fileID: 6755010711676348124}
   m_Layer: 0
   m_Name: Player Object
   m_TagString: Untagged
@@ -239,7 +239,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.45, y: 1.97, z: 1}
   m_Center: {x: -0.33, y: 0.48, z: 0}
---- !u!82 &4709989788809808408
+--- !u!114 &122194272954758149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316535743992346155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981f8f83e2ec75b4c9432447e02ac56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collision
+  delayBeforeReload: 4
+  crashAudioClip: {fileID: 8300000, guid: 54fc95740d165fd418291bead9cfb9ce, type: 3}
+  levelFinishAudioClip: {fileID: 8300000, guid: 1f07204fe8a8f2d45b8f22f3e3c67856, type: 3}
+  crashParticles: {fileID: 940494605388381771}
+  levelFinishParticles: {fileID: 2828635471458895218}
+--- !u!82 &6755010711676348124
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,7 +267,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 631bc3a0484fb0b4ca77ab55c5f032f2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -336,23 +353,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &122194272954758149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6316535743992346155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 981f8f83e2ec75b4c9432447e02ac56a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collision
-  delayBeforeReload: 4
-  crashAudioClip: {fileID: 8300000, guid: 54fc95740d165fd418291bead9cfb9ce, type: 3}
-  levelFinishAudioClip: {fileID: 8300000, guid: 1f07204fe8a8f2d45b8f22f3e3c67856, type: 3}
-  crashParticles: {fileID: 940494605388381771}
-  levelFinishParticles: {fileID: 2828635471458895218}
 --- !u!1001 &1138677291813597323
 PrefabInstance:
   m_ObjectHideFlags: 0
