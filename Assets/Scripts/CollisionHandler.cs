@@ -1,38 +1,25 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    [SerializeField]
-    public float delayBeforeReload = 2f;
-
-    [SerializeField] 
-    public AudioClip crashAudioClip;    
-
-    [SerializeField] 
-    public AudioClip levelFinishAudioClip;
-    
-    [SerializeField]
-    public ParticleSystem crashParticles;
-
-    [SerializeField]
-    public ParticleSystem levelFinishParticles;
-    
-    [SerializeField]
-    public ParticleSystem mainBoosterParticles;
-
-    [SerializeField]
-    public ParticleSystem leftBoosterParticles;
-
-    [SerializeField]
-    public ParticleSystem rightBoosterParticles;
-    
+    [SerializeField] public float delayBeforeReload = 2f;
+    [SerializeField] public AudioClip crashAudioClip;    
+    [SerializeField] public AudioClip levelFinishAudioClip;
+    [SerializeField] public ParticleSystem crashParticles;
+    [SerializeField] public ParticleSystem levelFinishParticles;
+    [SerializeField] public ParticleSystem mainBoosterParticles;
+    [SerializeField] public ParticleSystem leftBoosterParticles;
+    [SerializeField] public ParticleSystem rightBoosterParticles;
+    [SerializeField] private InputAction disableCollisionAction;
     
     private AudioSource audioSource;
     
     private Rigidbody rb;
     
     private bool isControllable = true;
+    private bool isCollidable = true;
 
     private const string FriendlyTag = "Friendly";
     private const string FinishTag = "Finish";
@@ -41,17 +28,33 @@ public class CollisionHandler : MonoBehaviour
     private void Start()
     {
         isControllable = true;
+        isCollidable = true;
         
         //Fetch the Rigidbody from the GameObject with this script attached
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-    }    
+    }
+    
+    private void Update()
+    {
+        if (disableCollisionAction.WasPressedThisFrame())
+        {
+            isCollidable  = !isCollidable ;
+            Debug.Log("Toggled collision handling to " + isCollidable);
+        } 
+    }
     
     private void OnCollisionEnter(Collision  other)
     {
         if (false == isControllable)
         {
             Debug.Log("No collision handling, player is not controllable.");
+            return;
+        }
+        
+        if (false == isCollidable)
+        {
+            Debug.Log("No collision handling, collisions are disabled.");
             return;
         }
 
@@ -130,5 +133,15 @@ public class CollisionHandler : MonoBehaviour
             nextSceneIndex = 0;
         }
         SceneManager.LoadScene(nextSceneIndex);
+    }
+    
+    private void OnEnable()
+    {
+        disableCollisionAction.Enable();
+    }
+    
+    private void OnDisable()
+    {
+        disableCollisionAction.Disable();
     }
 }

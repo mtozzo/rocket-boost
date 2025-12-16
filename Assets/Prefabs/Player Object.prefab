@@ -54,6 +54,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee0249ebb5ab7704b88306c8d2591dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  thrust: 1000
+  rotationSpeed: 100
+  boosterAudioClip: {fileID: 8300000, guid: 631bc3a0484fb0b4ca77ab55c5f032f2, type: 3}
+  mainBoosterParticles: {fileID: 7210239447166740782}
+  leftBoosterParticles: {fileID: 1207180672815224962}
+  rightBoosterParticles: {fileID: 6941834798662950432}
   turnAction:
     m_Name: Turn
     m_Type: 0
@@ -202,12 +208,6 @@ MonoBehaviour:
       m_Action: Level Skip
       m_Flags: 0
     m_Flags: 0
-  thrust: 1000
-  rotationSpeed: 100
-  boosterAudioClip: {fileID: 8300000, guid: 631bc3a0484fb0b4ca77ab55c5f032f2, type: 3}
-  mainBoosterParticles: {fileID: 7210239447166740782}
-  leftBoosterParticles: {fileID: 1207180672815224962}
-  rightBoosterParticles: {fileID: 6941834798662950432}
 --- !u!54 &1414363083522650586
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,6 +276,23 @@ MonoBehaviour:
   mainBoosterParticles: {fileID: 7210239447166740782}
   leftBoosterParticles: {fileID: 1207180672815224962}
   rightBoosterParticles: {fileID: 6941834798662950432}
+  disableCollisionAction:
+    m_Name: Disable Collision
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d5206787-c052-413f-b4c8-c42c989ab3b2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3cc11eac-5792-460e-9556-b7af4e3b6295
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Disable Collision
+      m_Flags: 0
+    m_Flags: 0
 --- !u!82 &6755010711676348124
 AudioSource:
   m_ObjectHideFlags: 0

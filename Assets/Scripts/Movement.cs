@@ -4,40 +4,21 @@ using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField]
-    private InputAction turnAction;
-    
-    [SerializeField]
-    private InputAction boosterAction;
+    [SerializeField] public float thrust = 1000f;
+    [SerializeField] public float rotationSpeed = 10f;
+    [SerializeField] public AudioClip boosterAudioClip;
+    [SerializeField] public ParticleSystem mainBoosterParticles;
+    [SerializeField] public ParticleSystem leftBoosterParticles;
+    [SerializeField] public ParticleSystem rightBoosterParticles;
 
-    [SerializeField]
-    private InputAction resetAction;
-
-    [SerializeField]
-    private InputAction levelSkipAction;
+    [SerializeField] private InputAction turnAction;
+    [SerializeField] private InputAction boosterAction;
+    [SerializeField] private InputAction resetAction;
+    [SerializeField] private InputAction levelSkipAction;
     
     private Rigidbody rb;
-    
     private AudioSource audioSource;
-
-    [SerializeField]
-    public float thrust = 1000f;
     
-    [SerializeField]
-    public float rotationSpeed = 10f;
-
-    [SerializeField] 
-    public AudioClip boosterAudioClip;
-    
-    [SerializeField]
-    public ParticleSystem mainBoosterParticles;
-
-    [SerializeField]
-    public ParticleSystem leftBoosterParticles;
-
-    [SerializeField]
-    public ParticleSystem rightBoosterParticles;
-
     private void Start()
     {
         //Fetch the Rigidbody from the GameObject with this script attached
@@ -50,7 +31,7 @@ public class Movement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (resetAction.IsPressed())
+        if (resetAction.WasPressedThisFrame())
         {
             //Reset the position and rotation of the Rigidbody
             Debug.Log("Processing reset");
@@ -58,7 +39,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        if (levelSkipAction.IsPressed())
+        if (levelSkipAction.WasPressedThisFrame())
         {
             Debug.Log("Processing level skip");
             ProcessLevelSkip();
@@ -171,6 +152,14 @@ public class Movement : MonoBehaviour
         resetAction.Enable();
         levelSkipAction.Enable();
     }
+    
+    private void OnDisable()
+    {
+        turnAction.Disable();
+        boosterAction.Disable();
+        resetAction.Disable();
+        levelSkipAction.Disable();        
+    }    
     
     private void LoadNextLevel()
     {
