@@ -141,6 +141,7 @@ MonoBehaviour:
       m_Action: Turn
       m_Flags: 8
     m_Flags: 0
+    m_Priority: 0
   boosterAction:
     m_Name: Booster
     m_Type: 0
@@ -166,6 +167,7 @@ MonoBehaviour:
       m_Action: Booster
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
   resetAction:
     m_Name: Reset
     m_Type: 0
@@ -191,6 +193,7 @@ MonoBehaviour:
       m_Action: Reset
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
   levelSkipAction:
     m_Name: Level Skip
     m_Type: 0
@@ -208,6 +211,7 @@ MonoBehaviour:
       m_Action: Level Skip
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
 --- !u!54 &1414363083522650586
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -293,6 +297,7 @@ MonoBehaviour:
       m_Action: Disable Collision
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
 --- !u!82 &6755010711676348124
 AudioSource:
   m_ObjectHideFlags: 0
